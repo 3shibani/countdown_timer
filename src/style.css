@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+    --default-color:rgb(24, 16, 16);
+    --white-col: #dcd9d9;
+    --silver: #ccc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent; 
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+    -webkit-tap-highlight-color: hsla(0, 0, 0, 0); 
+    -webkit-tap-highlight-color: #00000000; 
+    -webkit-tap-highlight-color: #0000;
+}
+
+body {
+    background: var(--default-color);
+}
+
+.container {
+    display: grid;
+    grid-auto-rows: 539px;
+    padding: 1rem 0rem;
+}
+
+.onboarding,
+.timer {
+    margin: 0.5rem auto;
+    border: 2px solid var(--white-col);
+    width: 277px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+
+@media screen and (min-width: 768px) {
+    body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .container {
+        padding: unset;
+        max-width: 750px;
+        width: 750px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+.onboarding {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.onboarding h1 {
+    font-family: "Rubik", sans-serif;
+    text-transform: uppercase;
+    color: var(--white-col);
+    font-size: 3.5rem;
+    user-select: none;
+    text-shadow: 2px 2px #000;
+}
+
+
+.timer {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: 50% 50%;
+}
+
+
+.ac-container button {
+    background-color: unset;
+    border: unset;
+    box-shadow: unset;
+    cursor: pointer;
+    font-family: "Rubik", sans-serif;
+    transition: all 0.5s ease-in-out;
+}
+
+.ac-container .btn-container {
+    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+}
+
+.btn-container button {
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    padding: 0.6rem;
+    border-radius: 0.5rem;
+    color: var(--white-col);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 2px solid var(--white-col);
+    font-family: "Rubik", sans-serif;
+}
+
+.btn-container button:hover {
+    border-color: #ccc;
+    box-shadow: unset;
+}
+
+.ac-container .input-form {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.ac-container input {
+    border: unset;
+    padding: 0.3rem;
+    box-shadow: unset;
+    outline: none;
+    padding-left: 1rem;
+    font-size: 1.2rem;
+}
+
+.ac-container input::placeholder {
+    font-size: 0.8rem;
+    color: var(--default-color);
+    text-transform: capitalize;
+}
+
+.used-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+    padding-top: 0.5rem;
+}
+
+.used-timers h2,
+.reset button {
+    font-size: 1rem;
+    font-weight: 400;
+    white-space: nowrap;
+    color: var(--white-col);
+    font-family: "Rubik", sans-serif;
+}
+
+.used-container ul {
+    height: 50%;
+    overflow-y: scroll;
+    margin-top: 1rem;
+}
+
+.used-container ul::-webkit-scrollbar {
+    display: none;
+}
+
+.reset {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.reset button {
+    color: var(--white-col);
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.reset button:hover {
+    border-color: var(--silver);
+    box-shadow: unset;
+}
+
+.used-container ul li {
+    margin-bottom: 0.3rem;
+}
+
+.used-container ul li button {
+    color: var(--white-col);
+    font-family: "Rubik", sans-serif;
+}
+
+
+.pg-container {
+    user-select: none;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pg-widget {
+    height: 194px;
+    width: 194px;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.pg-widget-inner {
+    position: absolute;
+    width: 174px;
+    height: 174px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+    background-color: var(--default-color);
+    z-index: 6;
+}
+
+
+.pg-widget-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--white-col);
+    font-family: "Rubik", sans-serif;
+}
+

@@ -1,9 +1,14 @@
-import './App.css';
-import Timer from './components/Timer';
+import React from 'react';
+import './style.css';
+
+/* Components */
+import Onboarding from "./components/Onboarding";
+import Timer from "./components/Timer";
 
 function App() {
   return (
-    <div className='App'>
+    <div className="container">
+      <Onboarding />
       <Timer />
     </div>
   );

@@ -1,48 +1,79 @@
-import React, { useEffect, useState } from "react";
-import './timer.css';
+import React, { useState, memo } from 'react'
+import Actions from './Actions'
+import Progress from './Progress'
 
-const Timer = () => {
+function Timer() {
+  const [toggleForm, setToggleForm] = useState(false);
+ 
+  const [timeInput, setTimeInput] = useState(1);
+ 
+  const [timeInMilliSeconds, setTimeInMilliSeconds] = useState(0);
+ 
+  const [usedTimes, setUsedTimes] = useState([]);
 
-  const [seconds,setSeconds]=useState(0);
-  const [minutes,setMinutes]=useState(0);
-
-  var timer;
-  useEffect(() =>{
-
-    timer = setInterval(()=>{
-        setSeconds(seconds+1);
-        if(seconds === 59){
-          setMinutes(minutes+1);
-          setSeconds(0);
-        }
-    },1000)
-    return ()=> clearInterval(timer);
-  });
-
-
-  const restart=()=>{
-      setSeconds(0);
-      setMinutes(0);
-  }
-  const stop=()=>{
-      clearInterval(timer);
+  const [countDownStarted, setCountDownStarted] = useState(false);
+  
+  function onToggle() {
+    setToggleForm(toggle => toggle = !toggleForm);
   }
 
-    return (
-        <div className="timer">
-          <div className="container">
-            <div className="timer_container">
-              <h1>Timer</h1>
-              <h1>{minutes<10? "0"+minutes:minutes}:{seconds<10? "0"+seconds:seconds}</h1>
-              <div className="btn">
-                <button className="restart" onClick={restart}>Restart</button>
-                <button className="stop" onClick={stop}>Stop</button>
-              </div>
+  function handleChange(e) {
+    const inputData = parseInt(e.target.value);
+    setTimeInput(inputData);
+  }
 
-            </div>
-          </div>
-            
-        </div>
-    )
+ 
+  const startTimer = () => {
+    setCountDownStarted(true);
+
+    if (toggleForm) {
+      setToggleForm(false)
+    }
+
+
+    setTimeInMilliSeconds(timeInput * 60 * 1000);
+
+    
+    setUsedTimes(times => [...times, timeInput]);
+  };
+
+  const stopTimer = () => {
+   
+    setCountDownStarted(false);
+    setTimeInMilliSeconds(0);
+
+ 
+  }
+
+  
+  const countDownTime = new Date().getTime() + timeInMilliSeconds;
+
+  const animationDuration = ((countDownTime - new Date().getTime()) / 1000) / 2;
+
+  return (
+    <div className="timer">
+      <Progress {...{
+        timeInMilliSeconds,
+        animationDuration,
+        stopTimer,
+        countDownStarted,
+        countDownTime
+      }}
+      />
+
+      <Actions {...{
+        toggleForm,
+        timeInput,
+        countDownStarted,
+        onToggle,
+        handleChange,
+        startTimer,
+        stopTimer,
+        usedTimes,
+        setUsedTimes
+      }} />
+    </div>
+  )
 }
-export default Timer;
+
+export default memo(Timer)
